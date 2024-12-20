@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useOpenMeteo } from '@/components/useOpenMeteo.ts'
+import type { Place } from '@/components/tsTypes.ts'
 
-const props = defineProps<{
-  latitude: number
-  longitude: number
-}>()
+const props = defineProps<Place>()
 
 const weatherData = await useOpenMeteo(props)
 
