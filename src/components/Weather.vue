@@ -4,13 +4,13 @@ import type { Place } from '@/components/tsTypes.ts'
 import { watch } from 'vue'
 
 const props = defineProps<{ place: Place }>()
-let weatherData
 
-watch(props, async () => {
-  weatherData = await useOpenMeteo(props.place)
-console.log(weatherData)
-})
-
+watch(props,
+  async () => {
+    const weatherData = await useOpenMeteo(props.place)
+    console.log(weatherData)
+  },
+  { immediate: true })
 
 </script>
 
