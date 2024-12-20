@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import Header from "@/components/Header.vue";
-import Forecast from "@/components/Main.vue";
+import Header from '@/components/Header.vue'
+import Main from '@/components/Main.vue'
 </script>
 
 <template>
   <Header>
     <template #header>Weather forecast</template>
   </Header>
-
-  <main>
-    <Forecast/>
-  </main>
+  <Main />
 </template>
 
 <style scoped>

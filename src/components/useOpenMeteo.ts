@@ -27,7 +27,6 @@ export const useOpenMeteo = async (place: Place) => {
 
   const hourly = response.hourly()!
   const current = response.current()!
-  console.log('current', current)
 
 // Note: The order of weather variables in the URL query and the indices below need to match!
   return {
@@ -56,18 +55,3 @@ export const useOpenMeteo = async (place: Place) => {
     },
   }
 }
-
-// `weatherData` now contains a simple structure with arrays for datetime and weather data
-//   for (let i = 0; i < weatherData.hourly.time.length; i++) {
-//     console.log(
-//       weatherData.hourly.time[i].toISOString(),
-//       weatherData.hourly.temperature2m[i],
-//       weatherData.hourly.relative_humidity_2m[i],
-//       weatherData.hourly.precipitation_probability[i],
-//       weatherData.hourly.surface_pressure[i],
-//       weatherData.hourly.cloud_cover[i],
-//       weatherData.hourly.wind_speed_10m[i],
-//       weatherData.hourly.wind_direction_10m[i],
-//       weatherData.hourly.uv_index[i]
-//     )
-//   }
