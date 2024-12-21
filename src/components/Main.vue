@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SearchPlace from "@/components/SearchPlace.vue";
+import SearchPlace from '@/components/SearchPlace.vue'
 import { type Ref, ref } from 'vue'
 import type { Place } from '@/components/tsTypes.ts'
 import Weather from '@/components/Weather.vue'
@@ -13,14 +13,20 @@ const change = (value) => {
 </script>
 
 <template>
-  <main>
-    <SearchPlace v-model="place" @change="change"/>
-    <Suspense v-if="place" fallback="loading">
-      <Weather :place="place" />
-    </Suspense>
+  <main class="main-container">
+    <SearchPlace v-model="place" @change="change" />
+    <Weather :place="place" />
   </main>
 </template>
 
-<style scoped>
-
+<style>
+.main-container {
+  display: flex;
+  flex-direction: column;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 </style>

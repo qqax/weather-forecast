@@ -12,15 +12,10 @@
 
 <style scoped>
 header {
+  display: flex;
+  justify-content: center;
+  place-items: center;
   line-height: 1.5;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    justify-content: center;
-    place-items: center;
-    padding: 2rem 0;
-  }
+  padding: 2rem 0;
 }
 </style>

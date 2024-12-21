@@ -30,12 +30,15 @@ const customLabel = ({ name, country, timezone }: { name: string; country: strin
 </script>
 
 <template>
-  <multiselect v-model="place" :options="options" open-direction="bottom" @search-change="asyncFind"
+  <multiselect v-model="place" :options="options" open-direction="bottom" @search-change="asyncFind" placeholder="Select place"
                track-by="label" label="label" @select="emit('change', $event)" :preserve-search="true" :clear-on-select="false"
-               :custom-label="customLabel"></multiselect>
+               :custom-label="customLabel" class="content"></multiselect>
 </template>
 
 <style src="vue-multiselect/dist/vue-multiselect.ssr.css"></style>
 
 <style>
+.content {
+  max-width: 600px;
+}
 </style>

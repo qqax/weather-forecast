@@ -65,7 +65,7 @@ const colors = computed(() => {
 </script>
 
 <template>
-  <div class="forecast-container" :style="{ background: `linear-gradient(0deg, hsl(${colors.min}, 100%, 85%) 35%, hsl(${colors.max}, 100%, 85%) 100%)` }">
+  <div class="forecast-container forecast-container--12days" :style="{ background: `linear-gradient(0deg, hsl(${colors.min}, 100%, 85%) 35%, hsl(${colors.max}, 100%, 85%) 100%)` }">
     <Line :data="chartData" :options="chartOptions" />
   </div>
 </template>
@@ -75,5 +75,12 @@ const colors = computed(() => {
   padding: 10px;
   border-radius: 0.5rem;
   color: #2c3e50;
+}
+.forecast-container--12days {
+  width: 100%;
+  max-width: 600px;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
 }
 </style>
