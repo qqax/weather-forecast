@@ -70,12 +70,7 @@ const colors = computed(() => {
   </div>
 </template>
 
-<style>
-.forecast-container {
-  padding: 10px;
-  border-radius: 0.5rem;
-  color: #2c3e50;
-}
+<style scoped>
 .forecast-container--12days {
   width: 100%;
   max-width: 600px;

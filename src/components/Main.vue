@@ -19,14 +19,5 @@ const change = (value) => {
   </main>
 </template>
 
-<style>
-.main-container {
-  display: flex;
-  flex-direction: column;
-  column-gap: 1.5rem;
-  row-gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
+<style scoped>
 </style>
