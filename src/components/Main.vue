@@ -15,7 +15,7 @@ const change = (value) => {
 <template>
   <main class="main-container">
     <SearchPlace v-model="place" @change="change" />
-    <Weather :place="place" />
+    <Weather v-if="place" :place="place" />
   </main>
 </template>
 

@@ -5,20 +5,17 @@ import { ref, watch } from 'vue'
 import Current from '@/components/Current.vue'
 import Forecast from '@/components/Forecast.vue'
 
-const props = defineProps<{ place: Place | undefined }>()
+const props = defineProps<{ place: Place }>()
 const currentWeather = ref()
 const hourlyForecast = ref()
 const z = ref()
 
 watch(props,
-
   async () => {
-    if (!!props.place) {
-      const { current, hourly, timezone } = await useOpenMeteo(props.place)
-      currentWeather.value = current
-      hourlyForecast.value = hourly
-      z.value = timezone
-    }
+    const { current, hourly, timezone } = await useOpenMeteo(props.place)
+    currentWeather.value = current
+    hourlyForecast.value = hourly
+    z.value = timezone
   },
   { immediate: true })
 
