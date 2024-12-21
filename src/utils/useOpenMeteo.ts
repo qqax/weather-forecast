@@ -19,8 +19,8 @@ export const useOpenMeteo = async (place: Place) => {
   const response = responses[0]
 
 // Attributes for timezone and location
-  const utcOffsetSeconds = response.utcOffsetSeconds()
-  // const timezone = response.timezone()
+//   const utcOffsetSeconds = response.utcOffsetSeconds()
+  const timezone = response.timezone()
   // const timezoneAbbreviation = response.timezoneAbbreviation()
   // const latitude = response.latitude()
   // const longitude = response.longitude()
@@ -30,8 +30,9 @@ export const useOpenMeteo = async (place: Place) => {
 
 // Note: The order of weather variables in the URL query and the indices below need to match!
   return {
+    timezone: timezone,
     current: {
-      time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
+      time: new Date(Number(current.time()) * 1000 ),
       temperature2m: current.variables(0)!.value(),
       relativeHumidity2m: current.variables(1)!.value(),
       precipitation: current.variables(2)!.value(),
@@ -42,7 +43,7 @@ export const useOpenMeteo = async (place: Place) => {
     },
     hourly: {
       time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
-        (t) => new Date((t + utcOffsetSeconds) * 1000)
+        (t) => new Date(t * 1000)
       ),
       temperature2m: hourly.variables(0)!.valuesArray()!,
       relative_humidity_2m: hourly.variables(1)!.valuesArray()!,

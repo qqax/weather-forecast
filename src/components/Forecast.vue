@@ -12,8 +12,9 @@ import {
 import { Line } from 'vue-chartjs'
 import { computed } from 'vue'
 import type { Hourly } from '@/components/tsTypes.ts'
+import { temperatureToHSL } from '@/utils/temperature.ts'
 
-const props = defineProps<{ hourly: Hourly }>()
+const props = defineProps<{ hourly: Hourly, timezone: string }>()
 
 ChartJS.register(
   CategoryScale,
@@ -27,33 +28,52 @@ ChartJS.register(
 
 const chartData = computed(() => {
   return {
-    labels: props.hourly.time.map(date => date.toLocaleTimeString(navigator.language, {
-      hour: '2-digit',
-      minute: '2-digit'
-    })),
+    labels: props.hourly.time.map(date => date.toLocaleTimeString("en-US", {timeZone: props.timezone, hour: 'numeric', minute: '2-digit'})),
     datasets: [
       {
-        label: '12 hours forecast',
         backgroundColor: '#ffffff',
         data: [...props.hourly.temperature2m],
         fill: false,
-        borderColor: 'rgb(255,53,53)',
-        tension: 0.4
+        borderColor: 'rgba(0,18,73,0.61)',
+        tension: 0.4,
       }
     ]
   }
 })
 
 const chartOptions = {
-  responsive: true
+  responsive: true,
+  scales: {
+    x: {
+      position: "top",
+    },
+
+  },
+  plugins: {
+    legend: {
+      display: false,
+    }
+  }
 }
+
+const colors = computed(() => {
+  const maxTemp = Math.max(...props.hourly.temperature2m)
+  const minTemp = Math.min(...props.hourly.temperature2m)
+  return { min: temperatureToHSL(minTemp), max: temperatureToHSL(maxTemp)}
+})
 
 </script>
 
 <template>
-  <Line :data="chartData" :options="chartOptions" />
+  <div class="forecast-container" :style="{ background: `linear-gradient(0deg, hsl(${colors.min}, 100%, 85%) 35%, hsl(${colors.max}, 100%, 85%) 100%)` }">
+    <Line :data="chartData" :options="chartOptions" />
+  </div>
 </template>
 
-<style scoped>
-
+<style>
+.forecast-container {
+  padding: 10px;
+  border-radius: 0.5rem;
+  color: #2c3e50;
+}
 </style>
