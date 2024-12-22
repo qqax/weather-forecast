@@ -11,7 +11,7 @@ import {
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import { computed } from 'vue'
-import type { Hourly } from '@/components/tsTypes.ts'
+import type { Hourly } from '@/assets/tsTypes.ts'
 import { temperatureToHSL } from '@/utils/temperature.ts'
 
 const props = defineProps<{ hourly: Hourly, timezone: string }>()
@@ -66,7 +66,7 @@ const colors = computed(() => {
 
 <template>
   <div class="forecast-container forecast-container--12days" :style="{ background: `linear-gradient(0deg, hsl(${colors.min}, 100%, 85%) 35%, hsl(${colors.max}, 100%, 85%) 100%)` }">
-    <Line :data="chartData" :options="chartOptions" />
+    <Line :data="chartData" aria-label="Weather in place at :" :options="chartOptions" />
   </div>
 </template>
 

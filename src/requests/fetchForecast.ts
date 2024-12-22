@@ -1,9 +1,9 @@
 import { fetchWeatherApi } from 'openmeteo'
-import type { Place } from '@/components/tsTypes.ts'
+import type { Cords } from '@/assets/tsTypes.ts'
 
-export const useOpenMeteo = async (place: Place) => {
+export const fetchForecast = async (cords: Cords) => {
   const params = {
-    ...place,
+    ...cords,
     'forecast_hours': 12,
     'current': ['temperature_2m', 'relative_humidity_2m', 'surface_pressure'],
     'hourly': ['temperature_2m']

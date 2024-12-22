@@ -1,6 +1,9 @@
-export type Place = {
+export type Cords = {
   latitude: number;
   longitude: number;
+}
+
+export type Place = Cords & {
   label: string;
 }
 

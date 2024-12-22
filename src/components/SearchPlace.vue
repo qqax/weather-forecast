@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import Multiselect from 'vue-multiselect'
 import { ref } from 'vue'
-import type { Place } from '@/components/tsTypes.ts'
+import type { Place } from '@/assets/tsTypes.ts'
+import { fetchGeodata } from '@/requests/fetchGeodata.ts'
 
 const place = defineModel<Place>()
 const options = ref([])
@@ -11,16 +12,9 @@ const emit = defineEmits<{
 }>()
 
 const asyncFind = async (value) => {
-  const url = new URL('https://geocoding-api.open-meteo.com/v1/search')
-  url.searchParams.append('name', value)
-  url.searchParams.append('count', '10')
-  url.searchParams.append('language', navigator.language)
-  url.searchParams.append('format', 'json')
-  fetch(url)
-    .then(response => response.json())
-    .then(({ results }) => {
-      options.value = results?.map(data => data) ?? []
-    })
+  fetchGeodata(value).then(({ results }) => {
+    options.value = results ?? []
+  })
 }
 
 const customLabel = ({ name, country, timezone }: { name: string; country: string; timezone: string }) => {
@@ -31,7 +25,8 @@ const customLabel = ({ name, country, timezone }: { name: string; country: strin
 
 <template>
   <multiselect v-model="place" :options="options" open-direction="bottom" @search-change="asyncFind" placeholder="Select place"
-               track-by="label" label="label" @select="emit('change', $event)" :preserve-search="true" :clear-on-select="false"
+               track-by="label" label="label"
+               @select="emit('change', $event)" :preserve-search="true" :clear-on-select="false"
                :custom-label="customLabel" class="content"></multiselect>
 </template>
 

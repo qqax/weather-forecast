@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Current } from '@/components/tsTypes.ts'
+import type { Current } from '@/assets/tsTypes.ts'
 import { computed } from 'vue'
 import { temperatureToHSL } from '@/utils/temperature.ts'
 
