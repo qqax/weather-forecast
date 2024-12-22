@@ -7,7 +7,7 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import { computed } from 'vue'
@@ -47,7 +47,6 @@ const chartOptions = {
     x: {
       position: "top",
     },
-
   },
   plugins: {
     legend: {
@@ -66,6 +65,7 @@ const colors = computed(() => {
 
 <template>
   <div class="forecast-container forecast-container--12days" :style="{ background: `linear-gradient(0deg, hsl(${colors.min}, 100%, 85%) 35%, hsl(${colors.max}, 100%, 85%) 100%)` }">
+    <!-- @vue-skip -->
     <Line :data="chartData" aria-label="Weather in place at :" :options="chartOptions" />
   </div>
 </template>
