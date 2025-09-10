@@ -4,6 +4,11 @@
   "private": true,
   "type": "module",
   "build": "vite build",
+  "homepage": "https://qqax.github.io/weather-forecast/",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:qqax/weather-forecast.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
